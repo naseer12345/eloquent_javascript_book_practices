@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5</title>
+</head>
+<body>
+    
+
+
+    <script>
+        // Excercise 1:
+    //   Flattening
+    //   Use the reduce method in combination  with the concat method to “flatten” an array of arrays
+    //   into a single array that has all the elements of the original arrays.
+
+    // In this Excercise i made made the reduce and concat from scratch to learn and practice higher order functions from the book.
+        
+    let reducedAndConcatedArr = []
+
+    const concatt = (arr)=>{
+        for(let items of arr){
+                reducedAndConcatedArr.push(items)
+            }
+        }
+
+    const reduceAndConcat = (arr) => {
+    for (let items of arr){
+        concatt(items)
+    }
+
+    return reducedAndConcatedArr
+    }
+
+
+     
+    let arrays = [[1, 2, 3], [4, 5], [6]];
+    console.log(reduceAndConcat(arrays))
+    // → [1, 2, 3, 4, 5, 6]
+
+
+
+    </script>
+</body>
+</html>
