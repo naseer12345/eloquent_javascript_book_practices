@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 project Robot</title>
+</head>
+<!-- Our project in this chapter is to build an automaton, a little program that performs a task in a virtual world. 
+Our automaton will be a mail-delivery robot picking up and dropping off parcels -->
+<body>
+    
+    <script  defer> 
+
+
+
+const roads = [
+  "Alice's House-Bob's House",   "Alice's House-Cabin",
+  "Alice's House-Post Office",   "Bob's House-Town Hall",
+  "Daria's House-Ernie's House", "Daria's House-Town Hall",
+  "Ernie's House-Grete's House", "Grete's House-Farm",
+  "Grete's House-Shop",          "Marketplace-Farm",
+  "Marketplace-Post Office",     "Marketplace-Shop",
+  "Marketplace-Town Hall",       "Shop-Town Hall"
+];
+
+
+console.log(roads)
+
+
+
+
+
+
+
+// let final =[]
+
+// let tst = roads.map((items) => {
+//     let tst2 = items.split("-");
+//     tst2.map((n)=>{
+//     if (!final.includes(n)){
+//         final.push(n)
+//     }
+//     return final;
+//     })
+//     return tst2
+// })
+// console.log(tst)
+// console.log("final outsite, " , final)
+
+
+// let arr = [{
+//     khan: ["baba"]
+// }]
+// arr[0] = {khan: [`${[this.length] = [23]}`]}
+// console.log(arr)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function buildGraph(edges) {
+  let graph = Object.create(null);
+  function addEdge(from, to) {
+    if (graph[from] == null) {
+      graph[from] = [to];
+    } else {
+      graph[from].push(to);
+    }
+  }
+  for (let [from, to] of edges.map(r => r.split("-"))) {
+    addEdge(from, to);
+    addEdge(to, from);
+  }
+  return graph;
+}
+
+const roadGraph = buildGraph(roads);
+
+
+
+console.log(roadGraph)
+
+
+
+
+
+
+
+
+
+
+class VillageState {
+  constructor(place, parcels) {
+    this.place = place;
+    this.parcels = parcels;
+  }
+
+  move(destination) {
+    if (!roadGraph[this.place].includes(destination)) {
+      return this;
+    } else {
+      let parcels = this.parcels.map(p => {
+        if (p.place != this.place) return p;
+        return {place: destination, address: p.address};
+      }).filter(p => p.place != p.address);
+      return new VillageState(destination, parcels);
+    }
+  }
+}
+
+
+
+    
+        
+    </script>
+</body>
+</html>
